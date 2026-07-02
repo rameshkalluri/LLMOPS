@@ -87,6 +87,12 @@ Keeps it safe, compliant, reproducible.
 
 ## 4. Architecture Diagram (visual overview)
 
+![End-to-End LLMOps Architecture](diagram/llmops_architecture.png)
+
+> Rendered PNG: [`diagram/llmops_architecture.png`](diagram/llmops_architecture.png)
+> (also `.svg`). Regenerate with `python diagram/architecture_diagram.py`.
+> The Mermaid version below renders live in Cursor's Markdown preview.
+
 ```mermaid
 flowchart TD
     subgraph DATA[Layer 1: Data & Embedding]
