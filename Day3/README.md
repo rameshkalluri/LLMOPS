@@ -3,7 +3,7 @@
 Notes for Day 3 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
 > **Finding this hard?** Read the plain-English walkthrough first:
-> [Days 3–5 Explained Simply](../Days-3-4-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+> [Days 1–5 Explained Simply](../Days-1-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
 
 > **Big-picture analogy:** So far the intern can talk (Day 1) and read the right notes
 > (Day 2). Today we give them a **workflow and tools**: a way to **remember the

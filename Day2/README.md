@@ -2,6 +2,9 @@
 
 Notes for Day 2 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
+> **Want the simple version first?** Read the plain-English walkthrough:
+> [Days 1–5 Explained Simply](../Days-1-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+
 > **Big-picture analogy:** Yesterday's intern answers from memory and sometimes makes
 > things up. **RAG gives the intern an open book** before they answer: "here are the
 > exact pages relevant to the question — now reply using **only these**." Result:

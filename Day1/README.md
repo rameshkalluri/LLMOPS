@@ -2,6 +2,9 @@
 
 Notes for Day 1 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
+> **Want the simple version first?** Read the plain-English walkthrough:
+> [Days 1–5 Explained Simply](../Days-1-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+
 > **Big-picture analogy:** An LLM is a **super-well-read intern** who has skimmed most
 > of the internet. It's great at language, but it **only remembers what's in front of
 > it right now** (the context window), sometimes **makes things up confidently**

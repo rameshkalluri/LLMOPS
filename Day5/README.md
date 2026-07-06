@@ -3,7 +3,7 @@
 Notes for Day 5 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
 > **Finding this hard?** Read the plain-English walkthrough first:
-> [Days 3–5 Explained Simply](../Days-3-4-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+> [Days 1–5 Explained Simply](../Days-1-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
 
 > **Big-picture analogy:** The intern is deployed and working. Now we run the **office
 > around them**: **CCTV + dashboards** to see how they're doing (observability),
