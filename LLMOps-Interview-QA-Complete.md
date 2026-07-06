@@ -12,61 +12,95 @@ Terraform / Vertex AI / Bedrock** background. Companion to
 
 ## 1. LLM Fundamentals
 
-**What is an LLM?**
+### What is an LLM?
+
 A **Large Language Model** is a neural network (usually a **Transformer**) trained on huge
 text corpora to **predict the next token**. Doing that well lets it write, summarize,
 reason, and answer. It's **pattern prediction, not fact lookup** — which is why it can
 hallucinate.
 
-**How does a Transformer work?**
+---
+
+### How does a Transformer work?
+
 Text is tokenized and embedded, then passed through stacked layers of **self-attention +
 feed-forward networks** with **positional encoding** so order matters. Attention lets each
 token look at every other token to build context; the final layer produces a probability
 distribution over the next token. It processes tokens **in parallel** (unlike RNNs), which
 is why it scales.
 
-**Explain self-attention.**
+---
+
+### Explain self-attention.
+
 Each token is projected into **Query, Key, Value** vectors. A token's output is a
 **weighted sum of all tokens' Values**, where weights come from the **dot product of its
 Query with every Key** (scaled, then softmaxed). In short: every token decides **how much
 to pay attention to every other token**. "Multi-head" runs several of these in parallel to
 capture different relationships.
 
-**What is a context window?**
+---
+
+### What is a context window?
+
 The **maximum number of tokens** (prompt + completion) the model can consider at once.
 Exceed it and older tokens are **truncated/forgotten**. It's the model's "desk size."
 
-**What are tokens?**
+---
+
+### What are tokens?
+
 **Sub-word units** the model reads/writes (roughly 4 characters or ¾ of a word in
 English). Billing and limits are **per token**.
 
-**Difference between prompt tokens and completion tokens.**
+---
+
+### Difference between prompt tokens and completion tokens.
+
 **Prompt (input) tokens** are what you send; **completion (output) tokens** are what the
 model generates. Both are billed, and **output is usually priced higher**.
 
-**What is temperature?**
+---
+
+### What is temperature?
+
 A **randomness dial** on sampling. **Low (0–0.3)** = focused, deterministic (facts, RAG,
 JSON); **high (0.8+)** = creative/varied. For production accuracy, keep it low.
 
-**Difference between Top-P and Top-K.**
+---
+
+### Difference between Top-P and Top-K.
+
 Both restrict the candidate next tokens. **Top-K** keeps the **K most likely** tokens;
 **Top-P (nucleus)** keeps the **smallest set whose probabilities sum to P**. Top-P adapts
 to the distribution's shape; you usually tune temperature **or** one of these, not all.
 
-**What are stop sequences?**
+---
+
+### What are stop sequences?
+
 Strings that tell the model to **stop generating** when produced (e.g., `"\n\n"` or
 `"</answer>"`). Used to cut off cleanly and control output structure.
 
-**What is seed?**
+---
+
+### What is seed?
+
 A value that makes sampling **reproducible** — same seed + same inputs → (near) identical
 output. Useful for testing/debugging and evals.
 
-**What is frequency penalty and presence penalty?**
+---
+
+### What is frequency penalty and presence penalty?
+
 **Frequency penalty** reduces the probability of tokens **proportional to how often they've
 appeared** (discourages repetition). **Presence penalty** penalizes tokens that have
 appeared **at all** (encourages introducing new topics).
 
-**What causes hallucinations?**
+---
+
+### What causes hallucinations?
+
 The model **predicts plausible text**, not verified facts, so when it lacks knowledge it
 **fills gaps confidently**. Causes: missing/stale knowledge, ambiguous prompts, high
 temperature, poor retrieval. Fixes: **RAG grounding, low temperature, "say I don't know"
@@ -96,7 +130,10 @@ is the actual request. Keep them **separate** (also a security boundary).
 provided context; if unsure say I don't know**," lower **temperature**, add **citations**,
 and run an **output grounding/faithfulness check** before returning.
 
-**How do you structure prompts for production?** Use **templates with placeholders**
+---
+
+### How do you structure prompts for production?** Use **templates with placeholders
+
 (role, task, context, rules, output format, examples), **force structured output (JSON)**,
 **version them in Git**, and **evaluate** changes on a golden set before shipping.
 
@@ -121,7 +158,10 @@ vector. You call it like any API and store the result.
 model reads; an **embedding** is a **single dense vector representing the meaning** of a
 piece of text (built from those tokens).
 
-**Difference between embedding model and LLM.** An **embedding model outputs a vector**
+---
+
+### Difference between embedding model and LLM.** An **embedding model outputs a vector
+
 (for search/similarity); an **LLM generates text**. Different purposes — often used
 together in RAG.
 
@@ -140,7 +180,8 @@ default for normalized text embeddings.
 
 ## 4. Vector Databases
 
-**Why can't we use SQL for semantic search?** Plain SQL does **exact/keyword matching**
+### Why can't we use SQL for semantic search?** Plain SQL does **exact/keyword matching
+
 (`LIKE`, full-text), not **meaning**. Semantic search needs **nearest-neighbor over
 high-dimensional vectors**, which needs specialized **ANN indexes** (though **pgvector**
 adds this to Postgres).
@@ -204,21 +245,30 @@ ideas spanning a boundary **aren't cut mid-thought**.
 **What happens if chunks are too small?** They **lose context** — meaning gets fragmented,
 retrieval returns snippets that don't fully answer.
 
-**Too large?** They add **irrelevant text (noise)**, **cost more tokens**, and **dilute**
+---
+
+### Too large?** They add **irrelevant text (noise)**, **cost more tokens**, and **dilute
+
 the relevant signal; retrieval becomes less precise.
 
 **What is reranking?** A **second, smarter pass**: retrieve a larger candidate set (e.g.,
 top-20) cheaply, then a **cross-encoder reranker** (e.g., Cohere Rerank, BGE-reranker)
 **re-scores** and keeps the **best few**. Big accuracy win for small latency cost.
 
-**What is hybrid search?** Combining **semantic (vector)** and **keyword (BM25/full-text)**
+---
+
+### What is hybrid search?** Combining **semantic (vector)** and **keyword (BM25/full-text)
+
 search, then merging results. Catches **exact IDs/codes/names** that embeddings miss.
 
 **What is metadata filtering?** Restricting search by stored **labels** (date, department,
 tenant, permissions) so you only search the **right subset** — essential for
 **multi-tenancy** and freshness.
 
-**Explain the full retrieval pipeline.**
+---
+
+### Explain the full retrieval pipeline.
+
 `question → (rewrite) → embed → hybrid search + metadata filter → retrieve top-N → rerank →
 keep top-k → assemble ordered context (best first) → grounded prompt → LLM → answer +
 citations → log/trace + grounding check.`
@@ -273,7 +323,10 @@ without app changes (OpenAI-compatible).
 tokens so it doesn't recompute them each step. It makes generation fast but **consumes GPU
 memory proportional to sequence length × concurrency** (the main memory pressure).
 
-**What is tensor parallelism?** **Splitting a model's weight tensors across multiple GPUs**
+---
+
+### What is tensor parallelism?** **Splitting a model's weight tensors across multiple GPUs
+
 so a model too big for one GPU runs across several, with GPUs computing in parallel and
 communicating each layer. Used for large (e.g., 70B) models.
 
@@ -328,7 +381,10 @@ still-loading pod).
 **Liveness probes.** Signal **"still healthy."** If it fails, Kubernetes **restarts** the pod
 (recovers hangs/deadlocks). Set generous timeouts so slow inference isn't mistaken for death.
 
-**Rolling updates.** Replace pods **gradually** (new up, old down) for **zero-downtime**
+---
+
+### Rolling updates.** Replace pods **gradually** (new up, old down) for **zero-downtime
+
 deploys; roll back with `kubectl rollout undo`. Default Deployment strategy.
 
 **Blue-Green deployment.** Run **two full environments** (blue=current, green=new); test
@@ -376,7 +432,8 @@ serving **Docker images** that Vertex and GKE pull.
 
 ## 10. AWS Bedrock
 
-**What is Bedrock?** A **fully managed, serverless** service to access **foundation models**
+### What is Bedrock?** A **fully managed, serverless** service to access **foundation models
+
 (Anthropic Claude, Llama, Titan, Mistral, etc.) via **one API** — no infra to manage.
 
 **Difference between Bedrock and SageMaker.** **Bedrock** = serverless **consume/customize
@@ -467,7 +524,10 @@ timing/data at each hop — essential for debugging chains/agents.
 **User feedback.** Capture **thumbs up/down + corrections**; feed real failures into the
 **golden eval set** (the feedback flywheel).
 
-**Evaluation metrics.** RAG: **faithfulness, answer relevancy, context precision/recall**
+---
+
+### Evaluation metrics.** RAG: **faithfulness, answer relevancy, context precision/recall
+
 (Ragas); plus **correctness, format compliance, latency, cost**.
 
 ---
@@ -517,7 +577,10 @@ is a deployment**.
 **Version prompts.** Store in **Git or a prompt registry** with IDs/versions; log which
 version served each request for reproducibility and rollback.
 
-**Version models.** Track **model name + settings + weights/adapters** in a **registry**
+---
+
+### Version models.** Track **model name + settings + weights/adapters** in a **registry
+
 (Vertex Model Registry / MLflow); pin versions per environment.
 
 **A/B testing.** Serve **two versions to split traffic** and compare **quality/cost/latency/
@@ -543,51 +606,76 @@ Registry, buckets — **reproducible, reviewable, versioned** infra with `plan`/
 
 ## 15. Scenario-Based Questions
 
-**Design a production RAG system.**
+### Design a production RAG system.
+
 Ingestion pipeline (load → structure-aware chunk → embed → **pgvector/Vertex Vector Search**
 with metadata). Query path: **rewrite → hybrid search + metadata filter → rerank → grounded
 prompt → LLM (via LiteLLM/Vertex/Bedrock) → answer + citations**. Wrap with **guardrails**,
 **tracing (Phoenix)**, **caching**, **eval gate in CI**, deploy on **Cloud Run or GKE**,
 secure with **IAM/secrets**, and close the **feedback flywheel**.
 
-**Deploy a 70B model on Kubernetes.**
+---
+
+### Deploy a 70B model on Kubernetes.
+
 Use a **multi-GPU node pool** (e.g., A100/H100), serve with **vLLM using tensor parallelism**
 across GPUs, **quantize** (AWQ/GPTQ) to fit memory, store weights on a **PVC/GCS** to avoid
 re-download, request `nvidia.com/gpu`, add **readiness probes** (long load), **HPA + Cluster
 Autoscaler** on GPU metrics, keep **min replicas warm** for cold starts.
 
-**Reduce LLM latency.**
+---
+
+### Reduce LLM latency.
+
 **Stream** tokens, **smaller/quantized model** or **routing**, **vLLM continuous batching +
 KV cache**, **speculative decoding**, **semantic cache**, **shorter prompts/fewer chunks**,
 keep replicas **warm**, and co-locate services to cut network hops.
 
-**Reduce token costs.**
+---
+
+### Reduce token costs.
+
 **Route** easy queries to cheaper models, **cache** (exact + semantic), **trim prompts/
 context**, **cap max_tokens**, **summarize history**, **batch** offline jobs, and add
 **per-user rate/token limits + budgets**.
 
-**Handle hallucinations.**
+---
+
+### Handle hallucinations.
+
 **RAG grounding** + "use only context / say I don't know," **low temperature**, **output
 grounding/faithfulness check**, **citations**, **rerank** for better context, and **eval +
 feedback** to catch regressions.
 
-**Debug slow inference.**
+---
+
+### Debug slow inference.
+
 **Trace** to find the slow hop (retrieval vs generation vs network). Check **GPU utilization/
 memory, batch efficiency, KV-cache pressure, sequence lengths, cold starts, HPA thresholds**;
 fix via batching/quantization/warm replicas/shorter context.
 
-**Scale to 10,000 requests/minute.**
+---
+
+### Scale to 10,000 requests/minute.
+
 **Horizontal scale** (HPA + Cluster Autoscaler on QPS/queue metrics via KEDA), **load-balanced
 replicas**, **continuous batching (vLLM)**, **caching**, **provisioned throughput** on hosted
 APIs, **rate limiting**, and **async/queue** for spikes; load-test to size it.
 
-**Secure an enterprise chatbot.**
+---
+
+### Secure an enterprise chatbot.
+
 **AuthN/AuthZ + RBAC**, **VPC/private endpoints**, **secrets in Secret Manager + Workload
 Identity**, **input/output guardrails**, **PII redaction + tenant isolation in RAG**,
 **prompt-injection defenses**, **audit logging**, and **rate limits** — follow **OWASP LLM
 Top 10**.
 
-**Handle model version upgrades with zero downtime.**
+---
+
+### Handle model version upgrades with zero downtime.
+
 **Canary or blue-green**: deploy new version alongside old, **run the eval gate**, shift a
 small % of traffic, watch metrics, then ramp to 100% (or roll back). Use **endpoint traffic
 splitting / rolling updates** and keep the old version ready.
@@ -596,39 +684,58 @@ splitting / rolling updates** and keep the old version ready.
 
 ## 16. Hands-on Questions
 
-**How would you deploy Llama/Meta models on Kubernetes?**
+### How would you deploy Llama/Meta models on Kubernetes?
+
 Build a **vLLM GPU container**, store weights on **GCS/PVC**, deploy to a **GPU node pool** with
 `nvidia.com/gpu` requests, **tensor parallelism + quantization** for big variants, **Service +
 Ingress**, **HPA + Cluster Autoscaler**, readiness probes for load time, secrets via **Workload
 Identity**. App points its **OpenAI base URL** at the internal vLLM service.
 
-**Explain your Jenkins pipeline for LLM deployment.**
+---
+
+### Explain your Jenkins pipeline for LLM deployment.
+
 `checkout → lint/unit tests → build image → push to Artifact Registry → run RAG/eval gate on
 golden set (fail on regression) → terraform apply (infra) → deploy to staging (kubectl/gcloud)
 → smoke tests → canary → promote to prod or auto-rollback.` Secrets via Jenkins credentials;
 auth via Workload Identity/service account.
 
-**How did you use Workload Identity?**
+---
+
+### How did you use Workload Identity?
+
 Bound a **Kubernetes service account to a GCP service account** so pods get **GCP credentials
 automatically (no key files)** to access GCS/Vertex/Secret Manager — with **least-privilege
 IAM**. Eliminates long-lived keys.
 
-**How did you store embeddings?**
+---
+
+### How did you store embeddings?
+
 In **Postgres with pgvector** — a `documents` table with `content`, `embedding VECTOR(n)`, and
 `metadata JSONB`, indexed with **HNSW (cosine)**. Keeps RAG data and app data in one DB;
 Vertex Vector Search/Pinecone when I need managed scale.
 
-**How did you troubleshoot `ImagePullBackOff`?**
+---
+
+### How did you troubleshoot `ImagePullBackOff`?
+
 Ran `kubectl describe pod` to read the exact error — usually **wrong image name/tag**,
 **missing registry auth/permissions**, or **private registry without imagePullSecrets/Workload
 Identity**. Fixed by correcting the tag, granting the node/SA **Artifact Registry Reader**, and
 verifying the image exists.
 
-**How did you secure service accounts?**
+---
+
+### How did you secure service accounts?
+
 **Least-privilege IAM roles**, **one SA per workload**, **Workload Identity** (no exported
 keys), **key rotation** where keys are unavoidable, and **audit logging** of usage.
 
-**Explain a production incident you resolved.**
+---
+
+### Explain a production incident you resolved.
+
 *(Use STAR.)* e.g., "**Latency spiked** on the chatbot; tracing (Phoenix) showed **retrieval**
 was slow after a data reload bloated the index. I **added metadata filters + reranking and
 rebuilt the HNSW index**, added a **semantic cache**, and set an **alert on p95 + groundedness**.
