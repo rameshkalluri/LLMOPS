@@ -87,11 +87,24 @@ Keeps it safe, compliant, reproducible.
 
 ## 4. Architecture Diagram (visual overview)
 
-![End-to-End LLMOps Architecture](diagram/llmops_architecture.png)
+![End-to-End LLMOps Architecture](diagram/full_architecture.png)
 
-> Rendered PNG: [`diagram/llmops_architecture.png`](diagram/llmops_architecture.png)
-> (also `.svg`). Regenerate with `python diagram/architecture_diagram.py`.
+> Rendered PNG: [`diagram/full_architecture.png`](diagram/full_architecture.png).
+> Per-day explanatory diagrams live in [`diagram/`](diagram/) — see the gallery below.
+> Regenerate everything with `python diagram/generate_diagrams.py`.
 > The Mermaid version below renders live in Cursor's Markdown preview.
+
+### Per-day diagrams (interview-focused)
+Each image ends with an **"Interview answers (say this)"** band.
+
+| Day | Topic | Image |
+|---|---|---|
+| Full | End-to-end system | [`full_architecture.png`](diagram/full_architecture.png) |
+| 1 | LLM foundations & prompt engineering | [`day1_llm_foundations.png`](diagram/day1_llm_foundations.png) |
+| 2 | RAG pipeline | [`day2_rag.png`](diagram/day2_rag.png) |
+| 3 | Orchestration, agents, fine-tuning | [`day3_orchestration_agents.png`](diagram/day3_orchestration_agents.png) |
+| 4 | Evaluation, deployment, GKE | [`day4_eval_deploy_gke.png`](diagram/day4_eval_deploy_gke.png) |
+| 5 | Monitoring, guardrails, security, cost, CI/CD | [`day5_monitoring_guardrails_cicd.png`](diagram/day5_monitoring_guardrails_cicd.png) |
 
 ```mermaid
 flowchart TD

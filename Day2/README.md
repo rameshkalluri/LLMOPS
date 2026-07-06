@@ -7,6 +7,10 @@ Notes for Day 2 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Pla
 > exact pages relevant to the question — now reply using **only these**." Result:
 > grounded, up-to-date answers with **citations** and fewer hallucinations.
 
+## Visual overview (interview-focused)
+
+![Day 2 - RAG](../diagram/day2_rag.png)
+
 ## Topics
 1. [Why RAG?](01-why-rag.md) — the problems RAG solves (private data, freshness, hallucination).
 2. [Embeddings & Vector Databases](02-vector-databases.md) — storing and searching meaning.

@@ -8,6 +8,10 @@ Notes for Day 1 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Pla
 > (hallucination), and you pay it **by the word** (tokens). Day 1 is about learning to
 > **talk to this intern clearly and cheaply.**
 
+## Visual overview (interview-focused)
+
+![Day 1 - LLM Foundations & Prompt Engineering](../diagram/day1_llm_foundations.png)
+
 ## Topics
 1. [What is an LLM?](01-what-is-an-llm.md) — tokens, context window, how it predicts, hallucination.
 2. [Model Settings](02-model-settings.md) — temperature, top-p, max tokens, roles (system/user).

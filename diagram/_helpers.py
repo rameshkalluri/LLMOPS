@@ -81,8 +81,10 @@ def band(ax, x, y, w, h, label, color, alpha=0.08):
         linewidth=1.4, edgecolor=color, facecolor=color, alpha=alpha,
         zorder=1,
     ))
-    ax.text(x - w / 2 + 3.2, y + h / 2 - 2.2, label, ha="left", va="center",
-            color=color, fontsize=10.5, fontweight="bold", zorder=2)
+    ax.text(x - w / 2 + 3.2, y + h / 2 - 1.6, label, ha="left", va="center",
+            color=color, fontsize=10.5, fontweight="bold", zorder=6,
+            bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=color,
+                      alpha=0.95, linewidth=1.0))
 
 
 def arrow(ax, p1, p2, color="#374151", style="-|>", lw=2.2, ls="-", rad=0.0,

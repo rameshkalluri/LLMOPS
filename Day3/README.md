@@ -2,10 +2,17 @@
 
 Notes for Day 3 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
+> **Finding this hard?** Read the plain-English walkthrough first:
+> [Days 3–5 Explained Simply](../Days-3-4-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+
 > **Big-picture analogy:** So far the intern can talk (Day 1) and read the right notes
 > (Day 2). Today we give them a **workflow and tools**: a way to **remember the
 > conversation** (memory), a set of **gadgets to use** (tools/agents), and — if needed —
 > **send them to a training course** to permanently change how they work (fine-tuning).
+
+## Visual overview (interview-focused)
+
+![Day 3 - Orchestration, Agents & Fine-Tuning](../diagram/day3_orchestration_agents.png)
 
 ## Topics
 1. [Orchestration Frameworks](01-orchestration-frameworks.md) — LangChain & LlamaIndex, chains.

@@ -2,11 +2,18 @@
 
 Notes for Day 4 of the [LLMOps 5-Day Learning Plan](../LLMOps-5-Day-Learning-Plan.md).
 
+> **Finding this hard?** Read the plain-English walkthrough first:
+> [Days 3–5 Explained Simply](../Days-3-4-5-Explained-Simply.md) — one story, everyday analogies, interview one-liners.
+
 > **Big-picture analogy:** The intern does great work in the practice room. Today we (1)
 > give them a **performance review** (evaluation), (2) put them in a **real office with a
 > phone line** (API + container), and (3) decide **which building** they work in — a
 > **serviced pop-up (Cloud Run)** or **your own workshop with heavy machinery (GKE /
 > Kubernetes)** where companies run bigger, GPU-powered LLM systems.
+
+## Visual overview (interview-focused)
+
+![Day 4 - Evaluation, Deployment & Serving on GKE](../diagram/day4_eval_deploy_gke.png)
 
 ## Topics
 1. [Evaluation](01-evaluation.md) — how to measure LLM/RAG quality (Ragas, LLM-as-judge).
