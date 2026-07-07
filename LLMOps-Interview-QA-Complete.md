@@ -62,7 +62,9 @@ Strings that tell the model to **stop generating** when produced (e.g., a closin
 ### What is seed?
 
 A value that makes sampling **reproducible** — same seed + same inputs → (near) identical output. Useful for testing/debugging and evals.
-Easy Way to Remember
+
+Easy Way to 
+
 Temperature → How creative?
 Top-K / Top-P → Which words can be chosen?
 Stop sequence → When should generation stop?
@@ -85,6 +87,8 @@ The model **predicts plausible text**, not verified facts, so when it lacks know
 ---
 
 ## 2. Prompt Engineering
+
+"Prompt engineering means writing clear and specific instructions so the AI gives the correct answer."
 
 ### What is zero-shot prompting?
 
