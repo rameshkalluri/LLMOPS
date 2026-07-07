@@ -188,7 +188,7 @@ By **distance/similarity** between vectors — **cosine similarity**, dot produc
 
 ### Why use cosine similarity?
 
-It measures the **angle (direction)** between vectors and is **magnitude-independent**, so it compares **meaning** rather than text length. It's the default for normalized text embeddings.
+ it compares **meaning** rather than text length. It's the default for normalized text embeddings.
 
 ---
 
