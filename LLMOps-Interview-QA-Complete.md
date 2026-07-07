@@ -134,7 +134,7 @@ Use **templates with placeholders** (role, task, context, rules, output format, 
 
 ### What are prompt templates?
 
-Reusable prompts with **variables** filled at runtime (e.g., context, question). They keep prompts consistent, testable, and versioned.
+"A prompt template is a reusable prompt with placeholders (variables). We fill in those placeholders with different values instead of writing a new prompt every time."
 
 ---
 
