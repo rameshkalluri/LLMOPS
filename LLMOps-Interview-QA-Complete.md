@@ -152,6 +152,8 @@ Numerical **vectors that capture the meaning** of text; similar meanings map to 
 
 They let computers do **semantic search** — find text by **meaning, not exact keywords** — which is the foundation of RAG.
 
+We need embeddings because computers cannot understand the meaning of text directly. Embeddings convert text into numbers (vectors) so the computer can compare meanings and find similar information.
+
 ---
 
 ### How are embeddings generated?
