@@ -39,12 +39,11 @@ The **maximum number of tokens** (prompt + completion) the model can consider at
 
 ### Difference between prompt tokens and completion tokens.
 
-"Temperature controls how random or creative the model's output is. A low temperature produces more deterministic and consistent responses, while a higher temperature allows the model to generate more diverse and creative responses. For production systems like RAG, code generation, or question answering, I usually use a low temperature (around 0.1–0.3) to improve accuracy and consistency."
 ---
 
 ### What is temperature?
 
-A **randomness dial** on sampling. **Low (0–0.3)** = focused, deterministic (facts, RAG, JSON); **high (0.8+)** = creative/varied. For production accuracy, keep it low.
+"Temperature controls how random or creative the model's output is. A low temperature produces more deterministic and consistent responses, while a higher temperature allows the model to generate more diverse and creative responses. For production systems like RAG, code generation, or question answering, I usually use a low temperature (around 0.1–0.3) to improve accuracy and consistency."
 
 ---
 
