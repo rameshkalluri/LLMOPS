@@ -144,6 +144,8 @@ Use **templates with placeholders** (role, task, context, rules, output format, 
 
 Numerical **vectors that capture the meaning** of text; similar meanings map to **nearby vectors**.
 
+"Embeddings convert text into numbers so that computers can understand the meaning of the text."
+
 ---
 
 ### Why do we need embeddings?
