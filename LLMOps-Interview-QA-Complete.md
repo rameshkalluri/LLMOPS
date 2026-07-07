@@ -74,6 +74,8 @@ Seed → Can I get the same result again? 🎯
 
 **Frequency penalty** reduces the probability of tokens **proportional to how often they've appeared** (discourages repetition). **Presence penalty** penalizes tokens that have appeared **at all** (encourages introducing new topics).
 
+Frequency Penalty = Don't repeat the same word too many times.
+Presence Penalty = Try talking about something new.
 ---
 
 ### What causes hallucinations?
