@@ -39,8 +39,7 @@ The **maximum number of tokens** (prompt + completion) the model can consider at
 
 ### Difference between prompt tokens and completion tokens.
 
-**Prompt (input) tokens** are what you send; **completion (output) tokens** are what the model generates. Both are billed, and **output is usually priced higher**.
-
+"Temperature controls how random or creative the model's output is. A low temperature produces more deterministic and consistent responses, while a higher temperature allows the model to generate more diverse and creative responses. For production systems like RAG, code generation, or question answering, I usually use a low temperature (around 0.1–0.3) to improve accuracy and consistency."
 ---
 
 ### What is temperature?
