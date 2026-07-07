@@ -22,8 +22,7 @@ Text is tokenized and embedded, then passed through stacked layers of **self-att
 
 ### Explain self-attention.
 
-Each token is projected into **Query, Key, Value** vectors. A token's output is a **weighted sum of all tokens' Values**, where weights come from the **dot product of its Query with every Key** (scaled, then softmaxed). In short: every token decides **how much to pay attention to every other token**. "Multi-head" runs several of these in parallel to capture different relationships.
-
+"Self-attention helps the model understand the relationship between words in a sentence. When the model reads a word, it checks all the other words to find which ones are most important. This helps it understand the context and generate better answers."
 ---
 
 ### What is a context window?
