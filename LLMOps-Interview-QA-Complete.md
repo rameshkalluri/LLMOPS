@@ -62,6 +62,11 @@ Strings that tell the model to **stop generating** when produced (e.g., a closin
 ### What is seed?
 
 A value that makes sampling **reproducible** — same seed + same inputs → (near) identical output. Useful for testing/debugging and evals.
+Easy Way to Remember
+Temperature → How creative?
+Top-K / Top-P → Which words can be chosen?
+Stop sequence → When should generation stop?
+Seed → Can I get the same result again? 🎯
 
 ---
 
